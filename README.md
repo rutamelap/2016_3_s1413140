@@ -1,5 +1,3 @@
-# Testai
-==================================
 NAUDOJIMOSI TAISYKLES SIA PROGRAMA
 ==================================
 
