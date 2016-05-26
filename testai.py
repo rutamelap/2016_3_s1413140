@@ -9,11 +9,10 @@ class TestPridetasLokomotyvas(unittest.TestCase):
         self.assertIsNone(traukinys.Traukinys.pridetasLokomotyvas(
             traukinys.Traukinys(1112,[100, 100, 1111]),[100, 100, 1111]))
 
-class TestIkeltiDuomenys(unittest.TestCase):
-	def test_ikeltiDuomenys(self):
-		self.assertEqual(surinktuvas.ikeltiDuomenys(
-			surinktuvas("vagon")))
-
+class TestAdd(unittest.TestCase):
+    def test_add(self):
+        self.assertIsNone(traukinys.Traukinys.__add__(
+            traukinys.Traukinys(1112,[100, 100, 100, 1111]),[100, 100, 100, 1111]))
 
 if __name__ == '__main__':
     unittest.main()
