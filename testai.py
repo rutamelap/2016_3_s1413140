@@ -7,7 +7,12 @@ import traukinys
 class TestPridetasLokomotyvas(unittest.TestCase):
     def test_pridetasLokomotyvas(self):
         self.assertIsNone(traukinys.Traukinys.pridetasLokomotyvas(
-            traukinys.Traukinys([100, 100, 9876])))
+            traukinys.Traukinys(1112,[100, 100, 1111]),[100, 100, 1111]))
+
+class TestIkeltiDuomenys(unittest.TestCase):
+	def test_ikeltiDuomenys(self):
+		self.assertEqual(surinktuvas.ikeltiDuomenys(
+			surinktuvas("vagon")))
 
 
 if __name__ == '__main__':

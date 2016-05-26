@@ -4,6 +4,7 @@ from traukinys import Traukinys
 import argparse
 import sys
 import random
+import json
 
 
 def meniuSarasas():
@@ -24,26 +25,41 @@ def meniuSarasas():
     13. Istrinti traukini
     14. Istrinti lokomotyva
     15. Istrinti vagona
+    16. Irasyti lokomotyvus i json
+    17. Irasyti vagonus i json
+    18. Irasyti traukiniai i json
     ENTER - iseiti is programos
     """)
-
+"""
 parser = argparse.ArgumentParser()
 parser.add_argument("-j", dest="json",
                     help="Duomenys įkelti iš json", action="store_true")
 parser.add_argument("-k", dest="konsole",
                     help="Duomenys pateikti iš konsolės", action="store_true")
 args = parser.parse_args()
-
+"""
 lokomotyvai = []
 vagonai = []
 traukiniai = []
-
+"""
 if args.json is False and args.konsole is False:
     parser.parse_args(["-h"])
+"""
 
+def ikeltiDuomenys():
+    variantas = input("Iveskite failo pavadinima: ")
+    try:
+        f = open("rutapupelyte/Desktop/Testai/" + variantas + ".json", "r")
+    except IOError:
+        print('\033[1m')
+        print('\nNepavyko nuskaityti')
+        print('\033[0m')
+        meniuSarasas()
+        return
+"""
 if args.json is True:
-    pass
-
+    ikeltiDuomenys()
+"""
 
 def vagonuSarasas():
     """ Spausdina egzistuojanciu vagonu sarasa """
@@ -447,6 +463,47 @@ def istrintiVagona():
     meniuSarasas()
 
 
+def irasytiLokomotyvus():
+    """ Iraso lokomotyvu duomenys i json faila """
+    bus_l = []
+    with open("lokomotyv.json", mode='w', encoding='utf-8') as f:
+        json.dump([], f)
+    with open("lokomotyv.json", mode='w', encoding='utf-8') as feedsjson:
+        for l in lokomotyvai:
+            entry = {'l_id': l.l_id, 'l_mase': l.l_mase, 'max_t_mase': l.max_t_mase}
+            bus_l.append(entry)
+        json.dump(bus_l, feedsjson, indent=4)
+    print("Duomenys perkelti i lokomotyv.json faila")
+
+
+def irasytiVagonus():
+    """ Iraso vagonu duomenys i json faila """
+    bus_v = []
+    with open("vagon.json", mode='w', encoding='utf-8') as f:
+        json.dump([], f)
+    with open("vagon.json", mode='w', encoding='utf-8') as feedsjson:
+        for v in vagonai:
+            entry = {'v_mase': v.v_mase, 'k_mase': v.k_mase,
+            'max_k_mase': v.max_k_mase, 'v_id': v.v_id}
+            bus_v.append(entry)
+        json.dump(bus_v, feedsjson, indent=4)
+    print("Duomenys perkelti i vagon.json faila")
+
+
+def irasytiTraukinius():
+    """ Iraso traukiniu duomenys i json faila """
+    bus_t = []
+    with open("traukin.json", mode='w', encoding='utf-8') as f:
+        json.dump([], f)
+    with open("traukin.json", mode='w', encoding='utf-8') as feedsjson:
+        for t in traukiniai:
+            entry = {'pavadinimas': t.t_id, 't_id': t.t_id,
+            'lokomotyvas': t.uzimtasLokomotyvas()}
+            bus_t.append(entry)
+        json.dump(bus_t, feedsjson, indent=4)
+    print("Duomenys perkelti i traukin.json faila")
+
+
 def rusiuotiTraukinius():
     """ Surusiuoja traukinius pagal pasirenkta tvarka """
     if len(traukiniai) == 0:
@@ -537,6 +594,12 @@ while meniu:
         istrintiLokomotyva()
     elif meniu == "15":
         istrintiVagona()
+    elif meniu == "16":
+        irasytiLokomotyvus()
+    elif meniu == "17":
+        irasytiVagonus()
+    elif meniu == "18":
+        irasytiTraukinius()
     elif meniu == "m":
         meniuSarasas()
     elif meniu == "0":
