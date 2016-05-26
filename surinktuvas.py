@@ -27,7 +27,8 @@ def meniuSarasas():
     15. Istrinti vagona
     16. Irasyti lokomotyvus i json
     17. Irasyti vagonus i json
-    18. Irasyti traukiniai i json
+    18. Irasyti traukinius i json
+    19. Ivesti failo pav
     ENTER - iseiti is programos
     """)
 """
@@ -600,6 +601,8 @@ while meniu:
         irasytiVagonus()
     elif meniu == "18":
         irasytiTraukinius()
+    elif meniu == "19":
+        ikeltiDuomenys()
     elif meniu == "m":
         meniuSarasas()
     elif meniu == "0":
